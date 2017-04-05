@@ -25,7 +25,7 @@ public class HelloController {
 		model.setViewName("hello");
 		model.addObject("msg", name);
 
-		return model;dfaff
+		return model;
 
 	}
 
