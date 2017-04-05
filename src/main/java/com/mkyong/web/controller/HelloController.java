@@ -16,7 +16,7 @@ public class HelloController {
 		model.addAttribute("message", "Spring 3 MVC Hello World");
 		return "hello";
 
-	}jj
+	}
 
 	@RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
 	public ModelAndView hello(@PathVariable("name") String name) {
