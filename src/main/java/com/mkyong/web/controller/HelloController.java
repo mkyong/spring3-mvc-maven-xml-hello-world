@@ -12,7 +12,7 @@ public class HelloController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-
+		System.out.println("Welcome:");
 		model.addAttribute("message", "Spring 3 MVC Hello World");
 		return "hello";
 
