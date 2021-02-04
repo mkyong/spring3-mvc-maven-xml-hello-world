@@ -1,0 +1,36 @@
+pipeline { agent any tools {
+             //Install the maven version configured as M3
+             maven "Maven"
+         }
+    stages { stage('SCM') { steps { git credentialsId:
+                '1f2d21af-7374-45d6-b533-ffbadfc027e4', url:
+                'https://github.com/Ratheesh1986/spring3-mvc-maven-xml-hello-world.git'
+            }
+        }
+        stage('Build') { steps {
+                // maven package
+                sh 'mvn package'
+                }
+        }
+    stage('artifacts') { steps {
+                // Artifacts
+                archiveArtifacts 'target/*.war'
+                }
+        }
+
+
+        stage('deploy') { steps
+            {withCredentials([usernameColonPassword(credentialsId:
+            'tomcat_credentials1', variable: 'tomcatcre')]) {sh "curl -v
+            -u ${tomcatcre} -T
+            /var/lib/jenkins/workspace/tomcat_deployment_pipeline/target/spring3-mvc-maven-xml-hello-world-1.0-SNAPSHOT.war
+            'http://ec2-15-207-55-141.ap-south-1.compute.amazonaws.com:8181/manager/text/deploy?path=/pipeline_Logic1&update=true'"
+
+}
+
+            }
+        }
+
+    }
+
+   }
